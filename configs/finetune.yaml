@@ -1,0 +1,30 @@
+# @package _global_
+# Full finetuning or linear probing of a pretrained encoder:
+#   python src/finetune.py experiment=feeding_tube/full_finetune model_name=vit-s
+
+defaults:
+  - _self_
+  - data: feeding_tube
+  - model: classifier
+  - callbacks: finetune
+  - logger: csv # wandb was used for the manuscript
+  - trainer: default
+  - paths: default
+  - extras: default
+  - hydra: default
+  - task: null
+  - experiment: null
+
+task_name: "finetune"
+tags: ["finetune"]
+
+# pretrained encoder: <paths.pretrained_dir>/<model_name>/epoch_epoch=<pretrained_epoch>.ckpt
+# (or set `pretrained_ckpt` directly)
+model_name: vit-s # vit-t | vit-s | vit-b
+pretrained_epoch: 99 # 0-indexed, 99 = end of the 100-epoch pretraining
+pretrained_ckpt: ${paths.pretrained_dir}/${model_name}/epoch_epoch=${zfill:${pretrained_epoch},3}.ckpt
+
+train: True
+test: True
+ckpt_path: null
+seed: null

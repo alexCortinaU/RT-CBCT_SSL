@@ -1,0 +1,25 @@
+# @package _global_
+# LoRA finetuning for feeding tube classification (Figs. 3 and 4).
+#
+# Pretraining-length ablation (fixed subset of ~8,000 CBCTs, run with 30 epochs):
+#   python src/finetune_lora.py -m experiment=feeding_tube/lora model_name=vit-t,vit-s,vit-b model.num_epochs=30 \
+#     pretrained_epoch=10,20,30,40,50,60,70,80,90,99 data.seed=244417,418122,424496,407796,606557
+# Annotation-budget ablation (fully pretrained encoders):
+#   python src/finetune_lora.py -m experiment=feeding_tube/lora model_name=vit-t,vit-s,vit-b \
+#     data.train_subsplit=0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375 \
+#     data.seed=244417,418122,424496,407796,606557
+
+defaults:
+  - override /data: feeding_tube
+  - override /model: lora_classifier
+  - override /callbacks: lora
+
+data:
+  batch_size: 50 # Default
+  train_subsplit: 0.1875
+
+model:
+  lr: 0.0005
+  num_epochs: 30 # Default
+
+tags: ["feeding_tube", "lora"]

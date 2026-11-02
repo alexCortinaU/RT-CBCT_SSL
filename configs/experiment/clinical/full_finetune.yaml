@@ -1,0 +1,19 @@
+# @package _global_
+# Clinical characteristics classification (Fig. 5), all patients (first CBCT per patient).
+# Select the characteristic with `task=sex|t_stage|n_stage|tumor_site`:
+#   python src/finetune.py -m experiment=clinical/full_finetune task=sex,t_stage,n_stage,tumor_site \
+#     model_name=vit-t,vit-s,vit-b seed=1,2,3,4,5  # five replicates
+# For age regression use experiment=clinical/full_finetune_age.
+
+defaults:
+  - override /data: clinical
+  - override /model: classifier
+  - override /callbacks: finetune
+
+model:
+  freeze_encoder: False
+  hidden_layers: [256, 128, 64]
+  lr: 0.0001 # Default
+  num_epochs: 50
+
+tags: ["clinical", "full_finetune"]

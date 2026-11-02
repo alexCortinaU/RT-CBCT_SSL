@@ -1,0 +1,15 @@
+# @package _global_
+# Age regression (Fig. 5e):
+#   python src/finetune_lora.py -m experiment=clinical/lora_age model_name=vit-t,vit-s,vit-b seed=1,2,3,4,5  # five replicates
+
+defaults:
+  - override /data: clinical
+  - override /model: lora_regressor
+  - override /callbacks: lora_regression
+  - override /task: age
+
+model:
+  lr: 0.001 # Default
+  num_epochs: 40
+
+tags: ["clinical", "age", "lora"]

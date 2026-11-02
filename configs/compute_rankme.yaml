@@ -1,0 +1,27 @@
+# @package _global_
+# RankMe of a pretraining checkpoint:
+#   python src/compute_rankme.py model_name=vit-s pretrained_epoch=99
+
+defaults:
+  - _self_
+  - paths: default
+  - extras: default
+  - hydra: default
+
+task_name: "rankme"
+tags: ["rankme"]
+
+model_name: vit-s
+pretrained_epoch: 99
+pretrained_ckpt: ${paths.pretrained_dir}/${model_name}/epoch_epoch=${zfill:${pretrained_epoch},3}.ckpt
+
+# csv inside `data_path` listing the preprocessed volumes (column `cbct_path_npy`) to embed;
+# in the manuscript: the feeding tube validation set (n = 4,834)
+data_path: ${paths.finetune_data_dir}
+csv_file: ???
+batch_size: 32
+num_workers: 16
+
+center_latents: False
+save_embeddings: False
+device: 0

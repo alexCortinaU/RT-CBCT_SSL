@@ -1,0 +1,4 @@
+plot_reconstructions:
+  _target_: src.utils.callbacks.PlotReconstructions
+  plot_every: 1
+  dirpath: ${paths.output_dir}/reconstructions

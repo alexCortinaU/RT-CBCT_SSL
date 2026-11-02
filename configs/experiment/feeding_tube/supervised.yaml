@@ -1,0 +1,22 @@
+# @package _global_
+# No-pretraining baseline for feeding tube classification (Figs. 3 and 4).
+#   python src/train_supervised.py -m experiment=feeding_tube/supervised \
+#     model.model_name=vit_tiny,vit_small,vit_base \
+#     data.train_subsplit=0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375 \
+#     data.seed=244417,418122,424496,407796,606557
+
+defaults:
+  - override /data: feeding_tube
+  - override /model: supervised_classifier
+  - override /callbacks: finetune
+
+data:
+  batch_size: 50
+  train_subsplit: 0.1875
+
+model:
+  model_name: vit_tiny
+  lr: 0.0005
+  num_epochs: 40
+
+tags: ["feeding_tube", "supervised"]

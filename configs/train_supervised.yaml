@@ -1,0 +1,24 @@
+# @package _global_
+# No-pretraining baseline:
+#   python src/train_supervised.py experiment=feeding_tube/supervised model.model_name=vit_small
+
+defaults:
+  - _self_
+  - data: feeding_tube
+  - model: supervised_classifier
+  - callbacks: finetune
+  - logger: csv # wandb was used for the manuscript
+  - trainer: default
+  - paths: default
+  - extras: default
+  - hydra: default
+  - task: null
+  - experiment: null
+
+task_name: "train_supervised"
+tags: ["supervised"]
+
+train: True
+test: True
+ckpt_path: null
+seed: null

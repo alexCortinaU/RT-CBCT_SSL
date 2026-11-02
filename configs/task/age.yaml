@@ -1,0 +1,4 @@
+# @package _global_
+# clinical characteristic: age (regression, targets are divided by 92 = max training age)
+data:
+  task: age_regression

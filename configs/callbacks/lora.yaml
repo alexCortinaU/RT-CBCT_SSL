@@ -1,0 +1,13 @@
+# LoRA (classification): as callbacks/finetune.yaml, the checkpoint with the best validation AUROC
+# is evaluated on the test set; its adapters are also saved in peft format (lora_checkpoints/lora_best)
+defaults:
+  - model_checkpoint
+  - lora_checkpoint
+  - save_split_seed
+  - early_stopping
+  - _self_
+
+model_checkpoint:
+  monitor: "val/auroc"
+  mode: "max"
+  save_last: False # full checkpoints include the frozen encoder; keep only the best one

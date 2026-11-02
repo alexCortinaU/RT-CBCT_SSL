@@ -1,0 +1,16 @@
+# @package _global_
+# Age regression (Fig. 5e):
+#   python src/train_supervised.py -m experiment=clinical/supervised_age model.model_name=vit_tiny,vit_small,vit_base seed=1,2,3,4,5  # five replicates
+
+defaults:
+  - override /data: clinical
+  - override /model: supervised_regressor
+  - override /callbacks: finetune_regression
+  - override /task: age
+
+model:
+  model_name: vit_tiny
+  lr: 0.0005 # Default
+  num_epochs: 40
+
+tags: ["clinical", "age", "supervised"]

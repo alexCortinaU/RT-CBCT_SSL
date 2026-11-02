@@ -1,0 +1,4 @@
+# saves the training subset (fraction, seed and rows) of each finetuning run
+save_split_seed:
+  _target_: src.utils.callbacks.SaveSplitSeed
+  dirpath: ${paths.output_dir}

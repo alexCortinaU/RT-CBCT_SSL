@@ -1,0 +1,18 @@
+# @package _global_
+# Clinical characteristics classification (Fig. 5), all patients (first CBCT per patient).
+# Select the characteristic with `task=sex|t_stage|n_stage|tumor_site`:
+#   python src/train_supervised.py -m experiment=clinical/supervised task=sex,t_stage,n_stage,tumor_site \
+#     model.model_name=vit_tiny,vit_small,vit_base seed=1,2,3,4,5  # five replicates
+# For age regression use experiment=clinical/supervised_age.
+
+defaults:
+  - override /data: clinical
+  - override /model: supervised_classifier
+  - override /callbacks: finetune
+
+model:
+  model_name: vit_tiny
+  lr: 0.0005 # Default
+  num_epochs: 40
+
+tags: ["clinical", "supervised"]
