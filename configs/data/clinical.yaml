@@ -1,0 +1,18 @@
+_target_: src.data.finetune_datamodule.FinetuneDataModule
+data_path: ${paths.finetune_data_dir}
+task: sex_classification # set by configs/task
+train_csv: clinical_train_val.csv
+test_csv: clinical_test.csv
+linear_probe_csv: null
+batch_size: 32 # TODO verify (value used at inference time)
+num_workers: 16
+pin_memory: True
+voxel_size: [1, 1, 2.5]
+crop_size: [256, 224, 64]
+train_subsplit: 1
+seed: null
+train_weighted_sampler: False
+online_preprocessing: False
+augmentations: null
+read_numpy: True
+return_test_paths: False

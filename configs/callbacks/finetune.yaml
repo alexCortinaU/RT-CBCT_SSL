@@ -1,0 +1,11 @@
+# full finetuning, linear probing and the supervised baseline: the checkpoint with the best
+# validation AUROC is evaluated on the test set
+defaults:
+  - model_checkpoint
+  - save_split_seed
+  - early_stopping
+  - _self_
+
+model_checkpoint:
+  monitor: "val/auroc"
+  mode: "max"

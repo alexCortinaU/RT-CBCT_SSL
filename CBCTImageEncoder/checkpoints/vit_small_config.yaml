@@ -1,0 +1,6 @@
+model_size: small
+embed_dim: 384       # redundant with model_size, but explicit -- easy sanity check
+patch_size: 16
+img_size: [256, 224, 64]
+voxel_size: [1.0, 1.0, 2.5]
+in_chans: 1

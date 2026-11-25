@@ -1,0 +1,21 @@
+# @package _global_
+# SimMIM pretraining: python src/pretrain.py experiment=pretrain/vit_s
+
+defaults:
+  - _self_
+  - data: pretrain
+  - model: simmim
+  - callbacks: pretrain
+  - logger: csv # wandb was used for the manuscript
+  - trainer: default
+  - paths: default
+  - extras: default
+  - hydra: default
+  - experiment: null
+
+task_name: "pretrain"
+tags: ["pretrain"]
+
+# resume pretraining from a checkpoint
+ckpt_path: null
+seed: null

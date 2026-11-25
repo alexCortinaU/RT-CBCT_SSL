@@ -1,0 +1,21 @@
+# @package _global_
+# Linear probing of a pretraining checkpoint (training tracking, Fig. 2): a linear layer on the
+# frozen CLS token, fitted on the feeding tube validation set (re-split into train/val)
+# and evaluated on the feeding tube test set. Run for every pretraining epoch:
+#   python src/finetune.py -m experiment=feeding_tube/linear_probe model_name=vit-s pretrained_epoch="range(0,100)"
+
+defaults:
+  - override /data: feeding_tube
+  - override /model: classifier
+  - override /callbacks: finetune
+
+data:
+  linear_probe_csv: feeding_tube_linear_probe.csv
+
+model:
+  freeze_encoder: True
+  hidden_layers: null
+  lr: 0.0001 # Default
+  num_epochs: 50
+
+tags: ["feeding_tube", "linear_probe"]

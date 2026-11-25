@@ -1,0 +1,31 @@
+_target_: src.models.lora_module.LoRAClassifierModule
+lr: 0.0005
+num_epochs: 40
+hidden_layers: [256, 128, 64]
+num_classes: 2
+task: binary
+loss_type: focal
+
+lora_config:
+  _target_: peft.LoraConfig
+  r: 2
+  lora_alpha: 2
+  init_lora_weights: pissa
+  target_modules: ["attn.qkv", "attn.proj", "mlp.fc1", "mlp.fc2"]
+  modules_to_save: ["head"]
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  weight_decay: 0.05
+  betas: [0.9, 0.999]
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.5
+  patience: 4
+  threshold: 0.0005
+
+compile: True

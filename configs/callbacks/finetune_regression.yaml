@@ -1,0 +1,10 @@
+# as callbacks/finetune.yaml, for regression tasks (no AUROC)
+defaults:
+  - model_checkpoint
+  - save_split_seed
+  - early_stopping
+  - _self_
+
+model_checkpoint:
+  monitor: "val/loss"
+  mode: "min"

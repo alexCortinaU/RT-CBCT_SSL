@@ -1,0 +1,7 @@
+# saves the LoRA adapters of the best epoch to <output_dir>/lora_checkpoints/lora_best
+lora_checkpoint:
+  _target_: src.utils.callbacks.LoraCheckpoint
+  exp_path: ${paths.output_dir}
+  dir_name: lora_checkpoints
+  monitor: "val/auroc"
+  mode: "max"

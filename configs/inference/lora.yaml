@@ -1,0 +1,15 @@
+# @package _global_
+# Use the same experiment (and overrides) as for training, e.g.
+#   python src/inference/lora.py experiment=feeding_tube/lora model_name=vit-s lora_checkpoint_path=...
+
+defaults:
+  - /finetune_lora
+  - _self_
+
+task_name: "inference"
+tags: ["inference"]
+exp_name: "inference_lora"
+callbacks: null
+logger: null
+lora_checkpoint_path: ??? # adapter folder, or the `lora_checkpoints` folder of a run
+device: 0

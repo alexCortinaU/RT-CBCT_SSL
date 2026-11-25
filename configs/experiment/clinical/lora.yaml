@@ -1,0 +1,17 @@
+# @package _global_
+# Clinical characteristics classification (Fig. 5), all patients (first CBCT per patient).
+# Select the characteristic with `task=sex|t_stage|n_stage|tumor_site`:
+#   python src/finetune_lora.py -m experiment=clinical/lora task=sex,t_stage,n_stage,tumor_site \
+#     model_name=vit-t,vit-s,vit-b seed=1,2,3,4,5  # five replicates
+# For age regression use experiment=clinical/lora_age.
+
+defaults:
+  - override /data: clinical
+  - override /model: lora_classifier
+  - override /callbacks: lora
+
+model:
+  lr: 0.0005 # Default
+  num_epochs: 40
+
+tags: ["clinical", "lora"]

@@ -1,0 +1,7 @@
+# @package _global_
+# clinical characteristic: n_stage
+data:
+  task: n_stage_classification
+model:
+  num_classes: 4
+  task: multiclass

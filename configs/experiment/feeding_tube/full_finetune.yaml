@@ -1,0 +1,27 @@
+# @package _global_
+# Full finetuning for feeding tube classification (Figs. 3 and 4).
+#
+# Pretraining-length ablation (fixed subset of ~8,000 CBCTs):
+#   python src/finetune.py -m experiment=feeding_tube/full_finetune model_name=vit-t,vit-s,vit-b \
+#     pretrained_epoch=10,20,30,40,50,60,70,80,90,99 data.seed=244417,418122,424496,407796,606557
+# Annotation-budget ablation (fully pretrained encoders):
+#   python src/finetune.py -m experiment=feeding_tube/full_finetune model_name=vit-t,vit-s,vit-b \
+#     data.train_subsplit=0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375 \
+#     data.seed=244417,418122,424496,407796,606557
+
+defaults:
+  - override /data: feeding_tube
+  - override /model: classifier
+  - override /callbacks: finetune
+
+data:
+  batch_size: 50
+  train_subsplit: 0.1875 # fraction of training patients, ~8,000 CBCTs
+
+model:
+  freeze_encoder: False
+  hidden_layers: [256, 128, 64]
+  lr: 0.0001
+  num_epochs: 50
+
+tags: ["feeding_tube", "full_finetune"]

@@ -1,0 +1,12 @@
+# @package _global_
+# SimMIM pretraining of ViT-t for 100 epochs (manuscript setting)
+#   python src/pretrain.py experiment=pretrain/vit_t
+
+model:
+  model_name: vit_tiny
+  num_epochs: 100
+
+data:
+  batch_size: 30 # TODO verify per model size
+
+tags: ["pretrain", "vit-t"]

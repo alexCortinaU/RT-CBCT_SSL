@@ -1,0 +1,18 @@
+_target_: src.data.finetune_datamodule.FinetuneDataModule
+data_path: ${paths.finetune_data_dir}
+task: feeding_tube_classification
+train_csv: feeding_tube_train_val.csv
+test_csv: feeding_tube_test.csv
+linear_probe_csv: null # feeding_tube_linear_probe.csv for the per-epoch linear probing
+batch_size: 50 # global batch size, needs to be divisible by the number of devices
+num_workers: 16
+pin_memory: True
+voxel_size: [1, 1, 2.5]
+crop_size: [256, 224, 64]
+train_subsplit: 1 # fraction of training patients (0, 1], see the annotation-budget ablation
+seed: null # seed of the patient sampling (drawn at random and saved by SaveSplitSeed if null)
+train_weighted_sampler: False
+online_preprocessing: False
+augmentations: null
+read_numpy: True
+return_test_paths: False

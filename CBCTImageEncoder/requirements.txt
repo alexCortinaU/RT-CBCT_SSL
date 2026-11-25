@@ -1,0 +1,11 @@
+# Core: loading the encoder and running inference.
+torch>=2.0
+numpy
+pyyaml
+torchio>=0.19
+
+# Only needed for scripts/lora_finetune_example.py
+peft>=0.16
+
+# Only needed for scripts/*_finetune_example.py (reading labels.csv)
+pandas

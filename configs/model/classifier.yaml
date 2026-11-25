@@ -1,0 +1,25 @@
+# head on the CLS token of a pretrained encoder (full finetuning / linear probing)
+_target_: src.models.finetune_module.ClassifierModule
+lr: 0.0001
+num_epochs: 50
+freeze_encoder: False
+hidden_layers: [256, 128, 64] # null -> single linear layer
+num_classes: 2
+task: binary
+loss_type: focal
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  weight_decay: 0.05
+  betas: [0.9, 0.999]
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.5
+  patience: 10
+  threshold: 0.0005
+
+compile: True

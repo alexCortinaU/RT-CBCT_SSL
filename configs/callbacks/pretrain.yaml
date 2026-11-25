@@ -1,0 +1,17 @@
+# SimMIM pretraining: keep a checkpoint of every epoch (used for the pretraining-length ablation)
+defaults:
+  - model_checkpoint
+  - plot_reconstructions
+  - lr_monitor
+  - model_summary
+  - rich_progress_bar
+  - _self_
+
+model_checkpoint:
+  filename: "epoch_{epoch:03d}" # with auto_insert_metric_name -> epoch_epoch=NNN.ckpt
+  monitor: null
+  save_last: True
+  save_top_k: -1
+  auto_insert_metric_name: True
+  every_n_epochs: 1
+  save_on_train_epoch_end: True

@@ -1,0 +1,17 @@
+_target_: src.data.pretrain_datamodule.SimMIMPretrainDataModule
+data_path: ${paths.pretrain_data_dir}
+csv_file: pretrain_cbcts.csv
+batch_size: 30 # global batch size, needs to be divisible by the number of devices
+num_workers: 10
+pin_memory: True
+voxel_size: [1, 1, 2.5]
+crop_size: [256, 224, 64]
+patch_size: 16
+mask_ratio: 0.6
+mask_patch_size: 32
+sample: null
+examples: [7150, 4150, 6395, 3923] # validation volumes shown by the PlotReconstructions callback
+read_numpy: True
+# optional text file with one `cbct_path` per line to leave out of pretraining (e.g. corrupted
+# scans); the manuscript excluded 27 scans this way
+exclude_file: null

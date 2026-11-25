@@ -1,0 +1,11 @@
+# as callbacks/lora.yaml, for regression tasks (no AUROC)
+defaults:
+  - lora
+
+model_checkpoint:
+  monitor: "val/loss"
+  mode: "min"
+
+lora_checkpoint:
+  monitor: "val/loss"
+  mode: "min"
